@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ced Castillo | Portfolio</title>
+
+<style>
+/* ========================== GLOBAL STYLE ========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #000;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* ========================== HEADER ========================== */
+header {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(5px);
+}
+
+header h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+nav a {
+  margin: 0 15px;
+  color: #00eaff;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+/* ========================== HERO ========================== */
+.hero {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.avatar-container {
+  width: 160px;
+  height: 160px;
+  margin: 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid #00eaff;
+  box-shadow: 0 0 20px #00eaff;
+}
+
+.avatar-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.typing {
+  font-size: 24px;
+  margin-top: 20px;
+  min-height: 40px;
+}
+
+/* ========================== SECTIONS ========================== */
+section {
+  display: none;
+  padding: 40px;
+  text-align: center;
+  background: #000; /* black background for all sections */
+}
+
+section.active {
+  display: block;
+}
+
+h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+/* ========================== PHOTO GALLERY ========================== */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+}
+
+.project-card img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border: 2px solid #00eaff;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #00eaff;
+}
+
+/* ========================== CONTACT ========================== */
+a {
+  color: #00eaff;
+}
+
+a:hover {
+  color: #fff;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0,0,0,0.6);
+  margin-top: 50px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>My Portfolio</h1>
+  <nav>
+    <a onclick="showSection('about')">About</a>
+    <a onclick="showSection('skills')">Skills</a>
+    <a onclick="showSection('images')">My Photos</a>
+    <a onclick="showSection('contact')">Contact</a>
+  </nav>
+</header>
+
+<!-- HERO SECTION -->
+<div class="hero">
+  <div class="avatar-container">
+    <img src="https://cedtheconnoiseur09.github.io/ced2028/images/ced1.jpg" alt="Ced Castillo">
+  </div>
+  <h2 class="typing" id="typing"></h2>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="active">
+  <h2>About Me</h2>
+  <p>I am Ced Castillo, passionate about creating meaningful and modern digital projects.</p>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="section">
+  <h2>My Skills</h2>
+  <div class="skills-section">
+    <h3>Programming Languages</h3>
+    <div class="skills-grid">
+      <div class="skill">PHP</div>
+      <div class="skill">C++</div>
+      <div class="skill">HTML</div>
+      <div class="skill">CSS</div>
+      <div class="skill">JavaScript</div>
+    </div>
+</section>
+
+<!-- PHOTOS SECTION -->
+<section id="images" class="section">
+  <h2>My Photos</h2>
+  <div class="projects-grid">
+    <div class="project-card"><img src="https://cedtheconnoiseur09.github.io/ced2028/images/ced1.jpg" alt="Image 1"></div>
+    <div class="project-card"><img src="https://cedtheconnoiseur09.github.io/ced2028/images/ced2.jpg" alt="Image 2"></div>
+    <div class="project-card"><img src="https://cedtheconnoiseur09.github.io/ced2028/images/ced3.jpg" alt="Image 3"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <h2>Contact</h2>
+  <p>Email: <a href="mailto:cedzoldyck09@gmail.com">cedzoldyck09@gmail.com</a></p>
+  <p>Facebook: <a href="https://www.facebook.com/ce.ddyii.5" target="_blank">Ced Castillo</a></p>
+  <p>Phone: 09060632079</p>
+</section>
+
+<footer>
+  <p>&copy; <span id="year"></span> Ced Castillo | All Rights Reserved.</p>
+</footer>
+
+<!-- ========================== JAVASCRIPT ========================== -->
+<script>
+// Auto Year
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// Section Toggle
+function showSection(id) {
+  document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+// Typing Effect
+const roles = ["Hi! I'm Ced Castillo"];
+let index = 0, char = 0;
+const typing = document.getElementById("typing");
+
+function type() {
+  if (char < roles[index].length) {
+    typing.textContent = roles[index].substring(0, char + 1);
+    char++;
+    setTimeout(type, 80);
+  } else {
+    setTimeout(erase, 1500);
+  }
+}
+
+function erase() {
+  if (char > 0) {
+    typing.textContent = roles[index].substring(0, char - 1);
+    char--;
+    setTimeout(erase, 50);
+  } else {
+    index = (index + 1) % roles.length;
+    setTimeout(type, 300);
+  }
+}
+
+setTimeout(type, 500);
+</script>
+
+</body>
+</html>
